@@ -245,9 +245,9 @@ def transform(zip_file, annotation_file, query_file, save_dir=None):
 
   train_test_split_file = osp.join(save_dir, 'train_test_split.pkl')
   # train_test_split = save_images(zip_file, save_dir, train_test_split_file)
-  # train_test_split = save_images_rap2(zip_file, annotation_file, query_file, \
-  #   save_dir, train_test_split_file)
-  train_test_split = load_pickle(train_test_split_file)
+  train_test_split = save_images_rap2(zip_file, annotation_file, query_file, \
+    save_dir, train_test_split_file)
+  # train_test_split = load_pickle(train_test_split_file)
   # partition train/val/test set
 
   trainval_ids = list(set([parse_new_im_name(n, 'id')
