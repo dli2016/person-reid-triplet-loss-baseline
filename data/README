@@ -1,0 +1,4 @@
+Put necessary data here:
+  RAP2: LabelData_fusion_v1_v2.mat
+  Query images list: query_test_image_name.txt
+  Image data: images-pedestrian.zip
