@@ -22,6 +22,8 @@ The results are as follows. `S1` and `S2` means `stride = 1` and `stride = 2` re
 | Duke-S1       | 79.76 | 64.27 | 85.32 | 81.48 |
 | CUHK03-S2     | 56.36 | 50.82 | 65.21 | 65.76 |
 | CUHK03-S1     | 59.14 | 54.43 | 69.86 | 70.03 |
+| RAP-S2        | 72.27 | 51.01 | 73.45 | 59.22 |
+| RAP-S1        | 73.97 | 53.41 | 75.77 | 61.87 |
 
 **We see that `stride = 1` (higher spatial resolution before global pooling) has obvious improvement over `stride = 2` (original ResNet). I tried this inspired by paper [Beyond Part Models: Person Retrieval with Refined Part Pooling](https://arxiv.org/abs/1711.09349).**
 
@@ -129,6 +131,13 @@ python script/dataset/transform_duke.py \
 --save_dir ~/Dataset/duke
 ```
 
+## RAP2
+
+One can apply to use RAP dateset under the steps in this page [RAP](http://rap.idealtest.org/) and send an email to jiajian2018@ia.ac.cn (or follow the page [here](https://github.com/dangweili/RAP)). Then, put the related files to the directory named data/ and run the following script.
+
+```bash
+python script/dataset/transform_rap2.py
+```
 
 ## Combining Trainval Set of Market1501, CUHK03, DukeMTMC-reID
 
@@ -172,6 +181,10 @@ elif name == 'cuhk03':
 elif name == 'duke':
   im_dir = ospeu('~/Dataset/duke/images')
   partition_file = ospeu('~/Dataset/duke/partitions.pkl')
+
+elif name == 'rap2':
+  im_dir = ospeu('data/rap2/images')
+  partition_file = ospeu('data/rap2/partitions.pkl')
 
 elif name == 'combined':
   assert part in ['trainval'], \
@@ -249,7 +262,7 @@ python script/experiment/train.py \
 You can also train it by yourself. The following command performs training, validation and finally testing automatically.
 
 Specify
-- a dataset name (one of `['market1501', 'cuhk03', 'duke']`)
+- a dataset name (one of `['market1501', 'cuhk03', 'duke', 'rap2']`)
 - stride, `1` or `2`
 - training on `trainval` set or `train` set (for tuning parameters)
 - an experiment directory for saving training log
@@ -288,7 +301,7 @@ tensorboard --help
 ## Visualize Ranking List
 
 Specify
-- a dataset name (one of `['market1501', 'cuhk03', 'duke']`)
+- a dataset name (one of `['market1501', 'cuhk03', 'duke', 'rap2']`)
 - stride, `1` or `2`
 - either `model_weight_file` (the downloaded `model_weight.pth`) OR `ckpt_file` (saved `ckpt.pth` during training)
 - an experiment directory for saving images and log
@@ -360,3 +373,4 @@ Taking Market1501 as an example
 - [Market1501](http://www.liangzheng.org/Project/project_reid.html)
 - [CUHK03](http://www.ee.cuhk.edu.hk/~xgwang/CUHK_identification.html)
 - [DukeMTMC-reID](https://github.com/layumi/DukeMTMC-reID_evaluation)
+- [RAP](https://github.com/dangweili/RAP)
